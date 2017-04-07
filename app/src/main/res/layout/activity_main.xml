@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:columnCount="2"
+    android:padding="10dp"
+    tools:context="com.imdb.SimulacionCarnet.MainActivity">
+
+    <Button
+        android:id="@+id/btnQueueClient"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/btnQueueClient"
+        android:textAllCaps="false"
+        />
+    <Button
+        android:id="@+id/btnUpdateList"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/btnUpdateList"
+        android:textAllCaps="false"
+        android:layout_gravity="right"
+        />
+
+    <ListView
+        android:id="@+id/listViewClientsQueue"
+        android:layout_height="401dp"
+        android:layout_width="match_parent"
+        android:layout_columnSpan="2"
+        android:layout_marginBottom="15dp">
+
+    </ListView>
+
+    <TextClock
+        android:layout_columnSpan="2"
+        android:layout_gravity="center_vertical"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+
+
+</GridLayout>

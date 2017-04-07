@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Simulación - Entrega de Carnets</string>
+    <string name="clientTitle">Cliente Nº</string>
+    <string name="clientStateSuccess">[Finalizado]</string>
+    <string name="clientStateFail">[Cancelado]</string>
+    <string name="btnReleaseClient">Finalizar Servicio</string>
+    <string name="switchClientDismissed">El Cliente se retiró</string>
+    <string name="btnQueueClient">Encolar Cliente</string>
+    <string name="btnUpdateList">Actualizar Lista</string>
+    <string name="btnAttendClient">Atender</string>
+</resources>

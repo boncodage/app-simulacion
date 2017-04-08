@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:columnCount="2"
     android:padding="10dp"
     tools:context="com.imdb.SimulacionCarnet.MainActivity">
@@ -16,28 +16,21 @@
         android:textAllCaps="false"
         />
     <Button
-        android:id="@+id/btnUpdateList"
+        android:id="@+id/btnSaveData"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/btnUpdateList"
+        android:text="@string/btnSaveQueueJson"
         android:textAllCaps="false"
         android:layout_gravity="right"
         />
 
     <ListView
         android:id="@+id/listViewClientsQueue"
-        android:layout_height="401dp"
-        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:layout_columnSpan="2"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="45dp"
+        android:layout_gravity="center">
 
     </ListView>
-
-    <TextClock
-        android:layout_columnSpan="2"
-        android:layout_gravity="center_vertical"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-
-
-
 </GridLayout>

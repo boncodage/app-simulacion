@@ -25,6 +25,7 @@ public class Client {
         this.id = id;
         this.clientArrivalTime = new Date().getTime();
         this.clientDismissed = false;
+        this.setState("");
     }
 
     //ID

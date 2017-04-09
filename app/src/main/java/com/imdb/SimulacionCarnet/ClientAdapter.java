@@ -68,8 +68,6 @@ public class ClientAdapter extends BaseAdapter implements ListAdapter {
             holder.releaseClientButton = (Button)convertView.findViewById(R.id.btnReleaseClient);
             holder.clientDismissedSwitch = (Switch)convertView.findViewById(R.id.clientDismissedSwitch);
             holder.clientTitleTextView = (TextView)convertView.findViewById(R.id.clientTitle);
-            holder.finishedImageView = (ImageView)convertView.findViewById(R.id.imageViewFinish);
-            holder.canceledImageView = (ImageView)convertView.findViewById(R.id.imageViewCancel);
 
             convertView.setTag(holder);
         }else{
@@ -110,25 +108,17 @@ public class ClientAdapter extends BaseAdapter implements ListAdapter {
             holder.clientTitleTextView.setText(client.getState()+ " : " + client.getId());
             if(clientState != failState){
                 holder.clientDismissedSwitch.setChecked(false);
-                holder.finishedImageView.setVisibility(View.VISIBLE);
-                holder.canceledImageView.setVisibility(View.INVISIBLE);
             }else{
                 holder.clientDismissedSwitch.setChecked(true);
-                holder.canceledImageView.setVisibility(View.VISIBLE);
-                holder.finishedImageView.setVisibility(View.INVISIBLE);
             }
         }else{
             holder.clientDismissedSwitch.setChecked(false);
-            holder.canceledImageView.setVisibility(View.INVISIBLE);
-            holder.finishedImageView.setVisibility(View.INVISIBLE);
         }
         return convertView;
     }
 
     static class ViewHolder{
         TextView clientTitleTextView;
-        ImageView finishedImageView;
-        ImageView canceledImageView;
         Button releaseClientButton;
         Button attendClientButton;
         Switch clientDismissedSwitch;

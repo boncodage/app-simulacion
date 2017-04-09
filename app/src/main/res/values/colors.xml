@@ -4,5 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#FDFDFD</color>
-    <color name="colorStates">#33C394</color>
+    <color name="orangeColor">#f48342</color>
+    <color name="darkPurpleBlueColor">#4d1b7c</color>
+    <color name="darkRed">#b21c1c</color>
+    <color name="successProcessState">#1fad26</color>
 </resources>

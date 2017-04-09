@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:paddingLeft="10dp"
-        android:rowCount="2"
-        android:columnCount="2">
+        android:paddingLeft="10dp">
 
         <TextView
             android:id="@+id/clientTitle"
@@ -19,50 +15,54 @@
             android:layout_width="wrap_content"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:textColor="@color/colorPrimaryDark"
-            android:text="@string/clientTitle"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="10dp"/>
+
+        <Button
+            android:id="@+id/btnAttendClient"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Notification.Title.Media"
+            android:text="@string/btnAttendClient"
+            android:textAllCaps="true"
+            android:textColor="@color/colorWhite"
+            android:backgroundTint="@color/darkPurpleBlueColor"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
             />
 
         <Button
             android:id="@+id/btnReleaseClient"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_gravity="right"
-            android:textAppearance="@style/TextAppearance.AppCompat.Notification.Title.Media"
+            android:backgroundTint="@color/orangeColor"
+            android:textColor="@color/colorWhite"
             android:text="@string/btnReleaseClient"
-            />
-        <ImageView
-            android:id="@+id/imageViewCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/canceled"
-            android:visibility="invisible"
-            />
-        <Button
-            android:id="@+id/btnAttendClient"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_gravity="right"
-            android:textAppearance="@style/TextAppearance.AppCompat.Notification.Title.Media"
-            android:text="@string/btnAttendClient"
-            android:layout_column="1"
+            android:layout_alignEnd="@+id/btnAttendClient"
+            android:layout_below="@+id/btnAttendClient"
             />
 
-        <ImageView
-            android:id="@+id/imageViewFinish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/finish"
-            android:visibility="invisible"
+        <TextView
+            android:id="@+id/processesStates"
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+             android:textColor="@color/successProcessState"
+            android:layout_alignStart="@+id/clientTitle"
+            android:layout_below="@+id/clientTitle"
+             android:inputType="textMultiLine"
             />
+
         <Switch
             android:id="@+id/clientDismissedSwitch"
             android:layout_height="wrap_content"
+            android:paddingTop="16dp"
             android:layout_width="wrap_content"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:text="@string/switchClientDismissed"
-            android:layout_gravity="right"
-            android:layout_column="1"
-            />
+            android:layout_alignEnd="@+id/btnAttendClient"
+            android:layout_below="@+id/btnReleaseClient"
+            android:layout_alignParentBottom="true"/>
 
-    </GridLayout>
-</FrameLayout>
+    </RelativeLayout>

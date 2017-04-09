@@ -19,6 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private static ArrayList<Client> clientsQueue = new ArrayList<>();
     private ClientAdapter adapter;
     private int clientCounter;
+    private static final int FIRST_POSITION = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +43,21 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnQueueClient = (Button)findViewById(R.id.btnQueueClient);
 
+        //Set client in queue
         btnQueueClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
                     clientCounter++;
-                    clientsQueue.add(new Client(clientCounter));
+                    Client client = new Client(clientCounter);
+                    //Stamp time of arrival
+                    Process initialProcess = client.getClientProcess(FIRST_POSITION);
+                    initialProcess.setArrivalTime(new Date().getTime());
+                    clientsQueue.add(client);
                     adapter.notifyDataSetChanged();
-//                    Toast.makeText(getApplicationContext(), "Cliente en cola de espera...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), initialProcess.getDescription() + ": " + initialProcess.getArrivalTime(), Toast.LENGTH_SHORT).show();
                 }catch (Exception e){
-                    Toast.makeText(getApplicationContext(), "Ocurrio un error: " + e.getStackTrace().toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Ocurrio un error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -9,18 +9,6 @@ import java.util.Date;
  */
 
 public class Client {
-//    private int arrivalTime_process1;
-//    private int releaseTime_process1;
-//
-//    private int arrivalTime_process2;
-//    private int releaseTime_process2;
-//
-//    private int arrivalTime_process3;
-//    private int releaseTime_process3;
-//
-//    private int arrivalTime_process4;
-//    private int releaseTime_process4;
-
     //Constructor
     public Client(int id) {
         this.id = id;
@@ -62,5 +50,8 @@ public class Client {
         }catch (Exception ex){
             ex.printStackTrace();
         }
+    }
+    public Process getClientProcess(int position){
+        return this.getClientProcessesData().get(position);
     }
 }

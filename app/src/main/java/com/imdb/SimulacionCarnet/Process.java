@@ -5,6 +5,14 @@ package com.imdb.SimulacionCarnet;
  */
 
 public class Process {
+
+    //Constructor
+    public Process(int id, String description) {
+        this.id = id;
+        this.description = description;
+    }
+
+    //ID of each process
     private int id;
 
     public int getId() {
@@ -20,6 +28,15 @@ public class Process {
         this.description = description;
     }
 
+    //stamp the time the process is created
+    private long arrivalTime;
+    public long getArrivalTime() {
+        return arrivalTime;
+    }
+    public void setArrivalTime(long arrivalTime){
+        this.arrivalTime = arrivalTime;
+    }
+    //Waiting time
     private String waitTime;
 
     public String getWaitTime() {
@@ -29,6 +46,7 @@ public class Process {
         this.waitTime = waitTime;
     }
 
+    //Service Time
     private String serviceTime;
 
     public String getServiceTime() {
@@ -38,6 +56,7 @@ public class Process {
         this.serviceTime = serviceTime;
     }
 
+    //Time since start to queue until client left
     private String totalTime;
 
     public String getTotalTime() {
@@ -47,6 +66,7 @@ public class Process {
         this.totalTime = totalTime;
     }
 
+    //Register some incidentalEvent that cancel the process or delayed.
     private String incidentalEventDescription;
 
     public String getIncidentalEventDescription() {
@@ -56,6 +76,7 @@ public class Process {
         this.incidentalEventDescription = incidentalEventDescription;
     }
 
+    //The client Left?
     private boolean processDismissed;
 
     public boolean isProcessDismissed() {
@@ -63,5 +84,14 @@ public class Process {
     }
     public void setProcessDismissed(boolean processDismissed) {
         this.processDismissed = processDismissed;
+    }
+
+    //The process could finish?
+    private boolean processCompleted;
+    public boolean isProcessCompleted(){
+        return this.processCompleted;
+    }
+    public void setProcessCompleted(boolean processCompleted){
+        this.processCompleted = processCompleted;
     }
 }

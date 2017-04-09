@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="msgCreatingProcessError">Los datos no son correctos.</string>
+    <string name="msgStartQueueError">No hay procesos registrados. Cree un nuevo proceso e intente de nuevo.</string>
+</resources>

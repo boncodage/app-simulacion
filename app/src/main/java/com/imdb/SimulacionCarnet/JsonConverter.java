@@ -19,7 +19,6 @@ public class JsonConverter {
             JSONArray list = new JSONArray();
             for (Client client : queue ) {
                 JSONObject clientToJson = new JSONObject();
-                clientToJson.put("elapsedTime",client.getElapsedTime());
                 clientToJson.put("state", client.getState());
                 clientToJson.put("id",client.getId());
                 list.put(clientToJson);

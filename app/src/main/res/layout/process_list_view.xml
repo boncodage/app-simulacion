@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:columnCount="2">
+
+    <TextView
+        android:id="@+id/textViewProcessDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:layout_margin="16dp"
+        android:inputType="textMultiLine"
+        android:layout_gravity="center"
+        android:layout_column="0"
+        />
+
+    <ImageButton
+        android:id="@+id/btnDeleteProcess"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        style="@style/Widget.Design.FloatingActionButton"
+        android:src="@mipmap/ic_delete_white_36dp"
+        android:layout_margin="16dp"
+        android:layout_gravity="right"
+        android:layout_column="1"/>
+
+
+</GridLayout>

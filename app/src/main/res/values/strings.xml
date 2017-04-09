@@ -10,4 +10,9 @@
     <string name="btnAttendClient">Atender</string>
     <string name="btnSetupProcesses">Configurar Procesos</string>
     <string name="btnStartQueue">Empezar</string>
+    <string name="title_activity_setup_processes">Administrar Procesos</string>
+    <string name="btnCreateProcess">Agregar</string>
+    <string name="editTextHintCreateProcess">¿Cúal es el proceso que desea agregar?</string>
+    <string name="editTextHintProcessNumber">¿Qué número de proceso es?</string>
+
 </resources>

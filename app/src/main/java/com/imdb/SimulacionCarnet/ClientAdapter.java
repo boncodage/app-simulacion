@@ -58,6 +58,7 @@ public class ClientAdapter extends BaseAdapter implements ListAdapter {
 
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
+        //A ViewHolder stands for improve the performance of the listView
         final ViewHolder holder;
 
         if (convertView == null){
@@ -93,7 +94,7 @@ public class ClientAdapter extends BaseAdapter implements ListAdapter {
             }
         });
         //Service time Finished
-        holder.releaseClientButton.setOnClickListener(new View.OnClickListener() {
+       /* holder.releaseClientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 long currentTimeInMillis = new Date().getTime();
@@ -102,7 +103,7 @@ public class ClientAdapter extends BaseAdapter implements ListAdapter {
                 client.setState(successState);
                 notifyDataSetChanged();
             }
-        });
+        });*/
         String clientState = client.getState();
 
         if(clientState != ""){

@@ -1,5 +1,6 @@
 package com.imdb.SimulacionCarnet;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -23,9 +24,9 @@ public class Client {
     //Constructor
     public Client(int id) {
         this.id = id;
-        this.clientArrivalTime = new Date().getTime();
-        this.clientDismissed = false;
         this.setState("");
+        this.clientProcessesData = new ArrayList<>();
+        setClientProcessesData();
     }
 
     //ID
@@ -37,24 +38,6 @@ public class Client {
         this.id = id;
     }
 
-    //clientArrivalTime
-    private long clientArrivalTime;
-    public long getClientArrivalTime() {
-        return clientArrivalTime;
-    }
-
-    //elapsedTime
-    private String elapsedTime;
-    public String getElapsedTime() {
-        return elapsedTime;
-    }
-    public void setElapsedTime(long elapsedTime) {
-        long secs = (elapsedTime/1000)%60;
-        long mins = (elapsedTime/60000)%60;
-        long hours = mins/60;
-        this.elapsedTime = hours + ":" + mins + ":" + secs;
-    }
-
     //State of client in Queue
     private String state;
     public void setState(String state){
@@ -64,12 +47,20 @@ public class Client {
         return this.state;
     }
 
-    //The client left?
-    private boolean clientDismissed;
-    public boolean isClientDismissed() {
-        return clientDismissed;
+    //List of Processes of the Total Queue.
+    private ArrayList<Process> clientProcessesData;
+
+    public ArrayList<Process> getClientProcessesData() {
+        return this.clientProcessesData;
     }
-    public void ClientDismissed(boolean clientDismissed) {
-        this.clientDismissed = clientDismissed;
+    public void setClientProcessesData() {
+        try{
+            for (Process process: Repository.getProcesses()) {
+                Process newProcess = new Process(process.getId(),process.getDescription());
+                this.clientProcessesData.add(newProcess);
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 }

@@ -58,8 +58,12 @@ public class ClientAdapter extends BaseAdapter implements ListAdapter {
 
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
+
         //A ViewHolder stands for improve the performance of the listView
         final ViewHolder holder;
+
+        //Save the current processPosition
+        int processPosition;
 
         if (convertView == null){
             convertView = myInflater.inflate(R.layout.client_list_view,null);
@@ -68,18 +72,40 @@ public class ClientAdapter extends BaseAdapter implements ListAdapter {
             holder.releaseClientButton = (Button)convertView.findViewById(R.id.btnReleaseClient);
             holder.clientDismissedSwitch = (Switch)convertView.findViewById(R.id.clientDismissedSwitch);
             holder.clientTitleTextView = (TextView)convertView.findViewById(R.id.clientTitle);
-
+            holder.finishedProcesses = (TextView)convertView.findViewById(R.id.processesStates);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
 
         final Client client = getItem(position);
+        final ArrayList<Process> clientProcesses = client.getClientProcessesData();
 
         final String successState = parent.getResources().getString(R.string.clientStateSuccess);
         final String failState = parent.getResources().getString(R.string.clientStateFail);
+        String queueClientMsg = parent.getResources().getString(R.string.queueClient);
 
-        holder.clientTitleTextView.setText("Cliente Nº: " + client.getId());
+        holder.clientTitleTextView.setText(+ client.getId() + ": " + queueClientMsg);
+        //Attend client in one process
+        holder.attendClientButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(client.getAttendClicksCounter() < (clientProcesses.size()-1)){
+                    Process currentProcess = client.getClientProcess(client.getAttendClicksCounter());
+                    currentProcess.setWaitTime(calculateWaitingTime(currentProcess));
+                    //Write the moment when start the service.
+                    currentProcess.setStartServiceTime(new Date().getTime());
+                    Toast.makeText(context, currentProcess.getDescription() + ": Tiempo de espera: " + currentProcess.getWaitTime(), Toast.LENGTH_SHORT).show();
+                    client.setAttendClicksCounter(client.getAttendClicksCounter() + 1);
+                    notifyDataSetChanged();
+                }else{
+                    Process currentProcess = client.getClientProcess(client.getAttendClicksCounter());
+                    currentProcess.setWaitTime(calculateWaitingTime(currentProcess));
+                    Toast.makeText(context, currentProcess.getDescription() + ": Tiempo de espera: " + currentProcess.getWaitTime(), Toast.LENGTH_SHORT).show();
+                    notifyDataSetChanged();
+                }
+            }
+        });
 
         //Client out of the Queue
         holder.clientDismissedSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -91,36 +117,80 @@ public class ClientAdapter extends BaseAdapter implements ListAdapter {
                 }
             }
         });
-        //Service time Finished
-       /* holder.releaseClientButton.setOnClickListener(new View.OnClickListener() {
+
+
+        //Service time Finished of one process
+        holder.releaseClientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                long currentTimeInMillis = new Date().getTime();
-                long elapsedTimeInMillis = currentTimeInMillis - client.getClientArrivalTime();
-                client.setElapsedTime(elapsedTimeInMillis);
-                client.setState(successState);
+                if(client.getReleaseClicksCounter() < (clientProcesses.size()-1)){
+                    Process currentProcess = client.getClientProcess(client.getReleaseClicksCounter());
+                    Process nextProcess = client.getClientProcess(client.getReleaseClicksCounter() + 1);
+                    currentProcess.setServiceTime(calculateServiceTime(currentProcess));
+                    //Stamp the time when starts counting de attending time of the next process.
+                    nextProcess.setArrivalTime(new Date().getTime());
+                    //Write the process finished in a text view
+                    String finishedProcesses = client.getFinishedProcesses() + "P" + currentProcess.getId() + ": " + successState + "\n";
+                    client.setFinishedProcesses(finishedProcesses);
+                    Toast.makeText(context, currentProcess.getDescription() + ": Tiempo de servicio: " + currentProcess.getServiceTime(), Toast.LENGTH_SHORT).show();
+                    client.setReleaseClicksCounter(client.getReleaseClicksCounter() + 1);
+                    notifyDataSetChanged();
+                }else{
+                    Process currentProcess = client.getClientProcess(client.getReleaseClicksCounter());
+                    currentProcess.setServiceTime(calculateWaitingTime(currentProcess));
+                    String finishedProcesses = client.getFinishedProcesses() + "P" + currentProcess.getId() + ": " + successState + "\n";
+                    client.setFinishedProcesses(finishedProcesses);
+                    client.setState(successState);
+                    Toast.makeText(context, currentProcess.getDescription() + ": Tiempo de servicio: " + currentProcess.getServiceTime(), Toast.LENGTH_SHORT).show();
+                    notifyDataSetChanged();
+                }
                 notifyDataSetChanged();
             }
-        });*/
+        });
+        holder.finishedProcesses.setText(client.getFinishedProcesses());
         String clientState = client.getState();
 
         if(clientState != ""){
             holder.clientTitleTextView.setText(client.getState()+ " : " + client.getId());
             if(clientState != failState){
-                holder.clientDismissedSwitch.setChecked(false);
+                holder.clientDismissedSwitch.setEnabled(false);
+                convertView.setBackgroundColor(Color.parseColor("#d8ff84"));
             }else{
                 holder.clientDismissedSwitch.setChecked(true);
+                convertView.setBackgroundColor(Color.parseColor("#ffb2fb"));
             }
+            holder.attendClientButton.setEnabled(false);
+            holder.releaseClientButton.setEnabled(false);
         }else{
             holder.clientDismissedSwitch.setChecked(false);
+            holder.clientDismissedSwitch.setEnabled(true);
+            holder.attendClientButton.setEnabled(true);
+            holder.releaseClientButton.setEnabled(true);
+            convertView.setBackgroundColor(Color.TRANSPARENT);
         }
         return convertView;
     }
 
     static class ViewHolder{
         TextView clientTitleTextView;
+        TextView finishedProcesses;
         Button releaseClientButton;
         Button attendClientButton;
         Switch clientDismissedSwitch;
     }
+
+    private String calculateWaitingTime(Process currentProcess){
+        long attendTime = new Date().getTime();
+        long waitTime = attendTime - currentProcess.getArrivalTime();
+        String waitTimeToString = Process.TimeConverter(waitTime);
+        return waitTimeToString;
+    }
+
+    private String calculateServiceTime(Process currentProcess){
+        long finishServiceTime = new Date().getTime();
+        long serviceTime = finishServiceTime - currentProcess.getStartServiceTime();
+        String serviceTimeToString = Process.TimeConverter(serviceTime);
+        return serviceTimeToString;
+    }
+
 }

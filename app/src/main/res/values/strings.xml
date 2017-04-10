@@ -4,7 +4,7 @@
     <string name="clientStateSuccess">[Finalizado]</string>
     <string name="clientStateFail">[Cancelado]</string>
     <string name="btnReleaseClient">Finalizar Servicio</string>
-    <string name="switchClientDismissed">El Cliente se retiró</string>
+    <string name="switchClientDismissed">El proceso se canceló</string>
     <string name="btnQueueClient">Encolar Cliente</string>
     <string name="btnSaveQueueJson">Guardar datos</string>
     <string name="btnAttendClient">Atender</string>

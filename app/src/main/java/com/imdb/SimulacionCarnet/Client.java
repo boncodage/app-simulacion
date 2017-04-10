@@ -9,12 +9,33 @@ import java.util.Date;
  */
 
 public class Client {
+
     //Constructor
     public Client(int id) {
         this.id = id;
         this.setState("");
         this.clientProcessesData = new ArrayList<>();
         setClientProcessesData();
+        this.attendClicksCounter = 0;
+        this.releaseClicksCounter = 0;
+        finishedProcesses = "";
+    }
+
+    //ClicksCounter for delivery each click on the attend button to the especific process for the client.
+    private int attendClicksCounter;
+    public int getAttendClicksCounter() {
+        return attendClicksCounter;
+    }
+    public void setAttendClicksCounter(int attendClicksCounter) {
+        this.attendClicksCounter = attendClicksCounter;
+    }
+
+    private int releaseClicksCounter;
+    public int getReleaseClicksCounter() {
+        return releaseClicksCounter;
+    }
+    public void setReleaseClicksCounter(int releaseClicksCounter) {
+        this.releaseClicksCounter = releaseClicksCounter;
     }
 
     //ID
@@ -51,7 +72,19 @@ public class Client {
             ex.printStackTrace();
         }
     }
+
     public Process getClientProcess(int position){
         return this.getClientProcessesData().get(position);
     }
+
+    public String getFinishedProcesses() {
+        return finishedProcesses;
+    }
+
+    public void setFinishedProcesses(String finishedProcesses) {
+        this.finishedProcesses = finishedProcesses;
+    }
+
+    private String finishedProcesses;
+
 }

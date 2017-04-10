@@ -36,6 +36,16 @@ public class Process {
     public void setArrivalTime(long arrivalTime){
         this.arrivalTime = arrivalTime;
     }
+
+    //Stamp the time when the client is attended.
+    private long startServiceTime;
+    public long getStartServiceTime() {
+        return startServiceTime;
+    }
+    public void setStartServiceTime(long startServiceTime) {
+        this.startServiceTime = startServiceTime;
+    }
+
     //Waiting time
     private String waitTime;
 
@@ -76,16 +86,6 @@ public class Process {
         this.incidentalEventDescription = incidentalEventDescription;
     }
 
-    //The client Left?
-    private boolean processDismissed;
-
-    public boolean isProcessDismissed() {
-        return processDismissed;
-    }
-    public void setProcessDismissed(boolean processDismissed) {
-        this.processDismissed = processDismissed;
-    }
-
     //The process could finish?
     private boolean processCompleted;
     public boolean isProcessCompleted(){
@@ -93,5 +93,12 @@ public class Process {
     }
     public void setProcessCompleted(boolean processCompleted){
         this.processCompleted = processCompleted;
+    }
+
+    public static String TimeConverter(long timeInMillis){
+        long secs = (timeInMillis / 1000) % 60;
+        long mins = (timeInMillis / 60000) % 60;
+        long hours = (timeInMillis / 3600000);
+        return String.format("%2d:%2d:%2d",hours,mins,secs);
     }
 }

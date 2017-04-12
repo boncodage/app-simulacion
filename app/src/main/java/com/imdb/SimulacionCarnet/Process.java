@@ -66,16 +66,6 @@ public class Process {
         this.serviceTime = serviceTime;
     }
 
-    //Time since start to queue until client left
-    private String totalTime;
-
-    public String getTotalTime() {
-        return totalTime;
-    }
-    public void setTotalTime(String totalTime) {
-        this.totalTime = totalTime;
-    }
-
     //Register some incidentalEvent that cancel the process or delayed.
     private String incidentalEventDescription;
 
@@ -86,14 +76,6 @@ public class Process {
         this.incidentalEventDescription = incidentalEventDescription;
     }
 
-    //The process could finish?
-    private boolean processCompleted;
-    public boolean isProcessCompleted(){
-        return this.processCompleted;
-    }
-    public void setProcessCompleted(boolean processCompleted){
-        this.processCompleted = processCompleted;
-    }
 
     public static String TimeConverter(long timeInMillis){
         long secs = (timeInMillis / 1000) % 60;
